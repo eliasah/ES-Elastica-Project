@@ -1,36 +1,47 @@
 <?php
+require_once 'vendor/autoload.php';
 
 class ESSearch
 {
+    protected $index;
+    protected $client;
+    protected $results;
+    protected $resultSet;
+
     public function __construct()
     {
+        $this->params = array();
+        $this->params['host'] = '172.19.19.19';
+        $this->params['port'] = 9200;
 
+        try {
+            $this->client = new Elastica\Client($this->params);
+            $this->index = $this->client->getIndex('dev');
+        } catch (Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
     }
 
-    public function search()
+    public function search($query)
     {
         // Define a Query . We want a string query .
-        $elasticaQueryString = new \Elastica\Query\QueryString();
+        $queryString = new \Elastica\Query\QueryString();
 
         //'And' or 'Or' default : 'Or'
-        $elasticaQueryString->setDefaultOperator('AND');
-        $elasticaQueryString->setQuery('sesam street');
-
-        // Create the actual search object with some data.
-        $elasticaQuery = new \Elastica\Query();
-        $elasticaQuery->setQuery($elasticaQueryString);
+        $queryString->setDefaultOperator('AND');
+        $queryString->setQuery($query);
 
         //Search on the index.
-        $elasticaResultSet = $elasticaIndex->search($elasticaQuery);
+        $this->resultSet = $this->index->search($queryString);
     }
 
     public function retrieve_results()
     {
-        $elasticaResults = $elasticaResultSet->getResults();
-        $totalResults = $elasticaResultSet->getTotalHits();
+        $this->results = $this->resultSet->getResults();
+        $totalResults = $this->resultSet->getTotalHits();
 
-        foreach ($elasticaResults as $elasticaResult) {
-            var_dump($elasticaResult->getData());
+        foreach ($this->results as $res) {
+            var_dump($res);
         }
     }
 } 
