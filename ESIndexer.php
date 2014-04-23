@@ -77,11 +77,11 @@ class ESIndexer
 
     function index()
     {
-    $options = array(
-    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    );
-        $pdo = new PDO("mysql:host=localhost;dbname=products_fr", 'root', 'root',$options);
+        $options = array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+        $pdo = new PDO("mysql:host=localhost;dbname=products_fr", 'root', 'root', $options);
         $pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
         $result = $pdo->query("SELECT id,title,description,categoryId,brandId,merchantId FROM OFFERS");
 
@@ -91,8 +91,8 @@ class ESIndexer
             try {
                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     $description = $row['description'];
-		    // echo $description;
-		    $offer = array(
+                    // echo $description;
+                    $offer = array(
                         'title' => $row['title'],
                         'description' => $description,
                         'categoryId' => $row['categoryId'],
