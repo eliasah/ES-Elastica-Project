@@ -1,0 +1,7 @@
+{
+    "name":"igraal/indexer",
+    "require": {
+	"ruflin/elastica":"*@stable",
+	"symfony/config":"*@stable"
+    }
+}
