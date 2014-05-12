@@ -1,7 +1,14 @@
 {
-    "name":"igraal/indexer",
+    "name": "igraal/indexer",
     "require": {
-	"ruflin/elastica":"*@stable",
-	"symfony/config":"*@stable"
+        "ruflin/elastica": "*@stable",
+        "symfony/config": "*@stable",
+        "symfony/yaml": "*@stable",
+        "symfony/console": "*@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
     }
 }
