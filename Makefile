@@ -3,6 +3,6 @@ compile:
 update:
 	composer update
 clean:
-	@rm -Rf *~
+	@rm -Rf *~ *#
 mrproper: clean
 	@rm -Rf vendor *.lock
