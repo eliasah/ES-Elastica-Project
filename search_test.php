@@ -7,10 +7,10 @@
  */
 require_once("ESSearch.php");
 
-$search = new ESSearch();
-$search->search("ipod");
-$res = $search->retrieve_results();
+echo $argv[1] or exit("Missing arguments");
 
-echo $res;
+$search = new ESSearch();
+$search->search($argv[1]);
+$res = $search->retrieve_results();
 
 ?>

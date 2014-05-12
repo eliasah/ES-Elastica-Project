@@ -8,5 +8,4 @@ echo "fetching offers" . PHP_EOL;
 $es->set_autocommit_size(10000);
 $es->index();
 
-echo "DONE" . PHP_EOL;
 ?>
