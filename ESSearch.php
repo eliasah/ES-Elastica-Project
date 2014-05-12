@@ -11,12 +11,12 @@ class ESSearch
     public function __construct()
     {
         $this->params = array();
-        $this->params['host'] = '172.19.19.19';
+        $this->params['host'] = 'localhost';
         $this->params['port'] = 9200;
 
         try {
             $this->client = new Elastica\Client($this->params);
-            $this->index = $this->client->getIndex('dev');
+            $this->index = $this->client->getIndex('products_fr');
         } catch (Exception $e) {
             echo $e->getMessage() . PHP_EOL;
         }
@@ -29,8 +29,9 @@ class ESSearch
 
         //'And' or 'Or' default : 'Or'
         $queryString->setDefaultOperator('AND');
-        $queryString->setQuery($query);
-
+        $queryString->setFields(array('title','description'));
+	$queryString->setQuery($query);
+	
         //Search on the index.
         $this->resultSet = $this->index->search($queryString);
     }
