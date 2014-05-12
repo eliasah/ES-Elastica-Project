@@ -1,7 +1,6 @@
 <?php
 
-namespace igraal\elasticsearch;
-require_once 'vendor/autoload.php';
+namespace Igraal\Elasticsearch;
 
 class ESIndexer
 {
@@ -45,7 +44,7 @@ class ESIndexer
 
 
         try {
-            $elasticaClient = new Elastica\Client($this->params);
+            $elasticaClient = new \Elastica\Client($this->params);
             $elasticaIndex = $elasticaClient->getIndex('dev');
 
             if (!$elasticaIndex->exists()) {
@@ -106,7 +105,7 @@ class ESIndexer
                         'merchantId' => $row['merchantId']
                     );
 
-                    $doc[] = new Elastica\Document($row['id'], $offer);
+                    $doc[] = new \Elastica\Document($row['id'], $offer);
 
                     $count++;
                     if ($count % $this->autoCommit == 0) {
@@ -149,7 +148,7 @@ class ESIndexer
                                 'merchantId' => $row['merchantId']
                             );
 
-                            $doc[] = new Elastica\Document($row['id'], $offer);
+                            $doc[] = new \Elastica\Document($row['id'], $offer);
 
                             $count++;
                             if ($count % $this->autoCommit == 0) {
