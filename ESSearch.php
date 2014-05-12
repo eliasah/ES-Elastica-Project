@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+require_once 'parameters.php';
 
 class ESSearch
 {
@@ -7,12 +8,11 @@ class ESSearch
     protected $client;
     protected $results;
     protected $resultSet;
+    protected $params;
 
-    public function __construct()
+    public function __construct($params)
     {
-        $this->params = array();
-        $this->params['host'] = 'localhost';
-        $this->params['port'] = 9200;
+        $this->params = $params;
 
         try {
             $this->client = new Elastica\Client($this->params);
