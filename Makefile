@@ -1,9 +1,9 @@
 compile:
-	composer install --no-dev
+	php ./composer.phar install --no-dev
 update:
-	composer update
+	php ./composer update
 autoload:
-	composer dump-autoload
+	php ./composer dump-autoload
 clean:
 	@rm -Rf *~ *#
 mrproper: clean
